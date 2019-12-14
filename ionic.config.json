@@ -1,5 +1,7 @@
 {
   "name": "easytools-client",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "react"
 }

@@ -3,14 +3,15 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "@capacitor/core": "1.4.0",
     "@ionic/react": "^4.11.0",
     "@ionic/react-router": "^4.11.0",
     "@types/jest": "^24.0.18",
-    "@types/node": "^12.7.12",
     "@types/react": "^16.9.5",
     "@types/react-dom": "^16.9.1",
     "@types/react-router": "^5.1.1",
     "@types/react-router-dom": "^5.1.0",
+    "axios": "^0.19.0",
     "ionicons": "^4.6.3",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
@@ -40,5 +41,10 @@
       "last 1 safari version"
     ]
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project",
+  "devDependencies": {
+    "@capacitor/cli": "1.4.0",
+    "@types/node": "^12.12.17"
+  },
+  "proxy": "https://us-central1-easy-tools-4386e.cloudfunctions.net/api"
 }

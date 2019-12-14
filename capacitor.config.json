@@ -1,0 +1,8 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "easytools-client",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "build",
+  "cordova": {}
+}
