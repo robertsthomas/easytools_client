@@ -12,7 +12,9 @@
     "@types/react-router": "^5.1.1",
     "@types/react-router-dom": "^5.1.0",
     "axios": "^0.19.0",
+    "dayjs": "^1.8.17",
     "ionicons": "^4.6.3",
+    "jwt-decode": "^2.2.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-router": "^5.1.0",
@@ -44,6 +46,7 @@
   "description": "An Ionic project",
   "devDependencies": {
     "@capacitor/cli": "1.4.0",
+    "@types/jwt-decode": "^2.2.1",
     "@types/node": "^12.12.17"
   },
   "proxy": "https://us-central1-easy-tools-4386e.cloudfunctions.net/api"

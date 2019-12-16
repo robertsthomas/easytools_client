@@ -15,10 +15,6 @@ const Login: React.FC<Props> = ({ history }) => {
     const [loading, setLoading] = useState(false)
     const [errors, setErrors] = useState()
 
-    const handleChange = (e: any) => {
-        console.log(e.target.value)
-    }
-
     const handleSubmit = (e: any) => {
         e.preventDefault();
 
@@ -32,6 +28,7 @@ const Login: React.FC<Props> = ({ history }) => {
         axios.post('/login', userData)
             .then(res => {
                 console.log(res.data)
+                localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`)
                 setLoading(false)
                 history.push('/');
             })
@@ -66,7 +63,7 @@ const Login: React.FC<Props> = ({ history }) => {
                                         value={password} onIonChange={(e: any) => setPassword(e.target.value)}></IonInput>
                                 </IonItem>
                                 <IonButton disabled={loading ? true : false} expand="full" type="submit" className="button">{loading ? <IonSpinner name="crescent" /> : 'Login'}</IonButton>
-                                {/* <small>Dont have an account? Sign up <Link to='/signup'>here</Link></small> */}
+                                <small>Dont have an account? Sign up <Link to='/signup'>here</Link></small>
                             </form>
                         </IonCol>
                     </IonRow>

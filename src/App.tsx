@@ -11,6 +11,10 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { apps, flash, send } from 'ionicons/icons';
+
+import jwtDecode from 'jwt-decode';
+
+import AuthRoute from './util/AuthRoute';
 import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
@@ -35,19 +39,39 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import Login from './pages/Login/Login';
+import Signup from './pages/Signup/Signup';
+
+
+let authenticated: any;
+const token = localStorage.FBIdToken;
+if (token) {
+  const decodedToken: any = jwtDecode(token);
+  if (decodedToken.exp * 1000 < Date.now()) {
+    window.location.href = '/login'
+    authenticated = false
+  } else {
+    authenticated = true;
+  }
+}
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Route path="/tab1" component={Tab1} exact={true} />
-          <Route path="/tab2" component={Tab2} exact={true} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
+
+          <Route path="/tab2" component={Tab2} />
           <Route path="/tab2/details" component={Details} />
-          <Route path="/login" component={Login} />
           <Route path="/tab3" component={Tab3} />
-          <Route path="/" render={() => <Redirect to="/tab1" />} exact={true} />
+
+          <Route exact path="/" render={() => <Redirect to="/tab1" />} />
+          <AuthRoute exact path="/tab1" component={Tab1} authenticated={authenticated} />
+
         </IonRouterOutlet>
+
+
         <IonTabBar slot="bottom">
           <IonTabButton tab="tab1" href="/tab1">
             <IonIcon icon={flash} />
