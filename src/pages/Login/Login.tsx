@@ -5,38 +5,29 @@ import './login.css';
 import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 
+import { connect } from 'react-redux'
+import { loginUser } from '../../redux/actions/userActions'
+
 interface Props extends RouteComponentProps<any> {
     handleSubmit: () => any;
+    loginUser: Function;
+    UI: any;
 }
 
-const Login: React.FC<Props> = ({ history }) => {
+const Login: React.FC<Props> = ({ loginUser, history, UI: { loading } }) => {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
-    const [loading, setLoading] = useState(false)
     const [errors, setErrors] = useState()
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
 
-        setLoading(true)
-
         const userData = {
             email: email,
             password: password
         }
-        console.log(userData)
-        axios.post('/login', userData)
-            .then(res => {
-                console.log(res.data)
-                localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`)
-                setLoading(false)
-                history.push('/');
-            })
-            .catch(err => {
-                console.log(err.response.data)
-                setErrors(err.response.data)
-                setLoading(false)
-            })
+
+        loginUser(userData, history);
     }
 
     return (
@@ -72,4 +63,15 @@ const Login: React.FC<Props> = ({ history }) => {
         </IonPage>
     )
 }
-export default Login;
+
+const mapStateToProps = (state: any) => ({
+    user: state.user,
+    UI: state.UI
+})
+
+const mapActionsToProps = {
+    loginUser
+}
+
+
+export default connect(mapStateToProps, mapActionsToProps)(Login);
