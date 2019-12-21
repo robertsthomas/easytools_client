@@ -1,4 +1,4 @@
-import { SET_USER, LOADING_UI } from '../types'
+import { SET_USER, LOADING_UI, SET_AUTHENTICATED } from '../types'
 import axios from 'axios'
 
 export const loginUser = (userData, history) => (dispatch) => {
@@ -6,17 +6,33 @@ export const loginUser = (userData, history) => (dispatch) => {
 
     axios.post('/login', userData)
         .then(res => {
-            const FBIdToken = `Bearer ${res.data.token}`
-            localStorage.setItem('FBIdToken', FBIdToken)
-            axios.defaults.headers.common['Authorization'] = FBIdToken
-
+            setAuthorizationHeader(res.data.token)
             dispatch(getUserData());
-
             history.push('/');
         })
         .catch(err => {
             console.log(err.response.data)
         })
+}
+
+export const signupUser = (newUserData, history) => (dispatch) => {
+    dispatch({ type: LOADING_UI });
+
+    axios.post('/signup', newUserData)
+        .then(res => {
+            setAuthorizationHeader(res.data.token)
+            dispatch(getUserData());
+            history.push('/');
+        })
+        .catch(err => {
+            console.log(err.response.data)
+        })
+}
+
+export const logoutUser = () => (dispatch) => {
+    localStorage.removeItem('FBIdToken');
+    delete axios.defaults.headers.common['Authorization']
+    dispatch({ type: SET_AUTHENTICATED })
 }
 
 export const getUserData = () => (dispatch) => {
@@ -28,4 +44,10 @@ export const getUserData = () => (dispatch) => {
             })
         })
         .catch(err => console.log(err));
+}
+
+const setAuthorizationHeader = (token) => {
+    const FBIdToken = `Bearer ${token}`
+    localStorage.setItem('FBIdToken', FBIdToken)
+    axios.defaults.headers.common['Authorization'] = FBIdToken
 }

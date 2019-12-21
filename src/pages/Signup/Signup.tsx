@@ -4,23 +4,24 @@ import { IonPage, IonContent, IonGrid, IonRow, IonCol, IonText, IonItem, IonLabe
 import axios from 'axios';
 import { RouteComponentProps } from 'react-router';
 
-interface Props extends RouteComponentProps<any> {
+import { connect } from 'react-redux';
+import { signupUser } from '../../redux/actions/userActions';
 
+interface Props extends RouteComponentProps<any> {
+    signupUser: Function;
+    UI: any
 }
 
-const Signup: React.FC<Props> = ({ history }) => {
+const Signup: React.FC<Props> = ({ signupUser, history, UI: { loading } }) => {
 
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [confirmPassword, setConfirmPassword] = useState()
     const [user, setUser] = useState()
-    const [loading, setLoading] = useState(false)
     const [errors, setErrors] = useState()
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-
-        setLoading(true)
 
         const newUserData = {
             email,
@@ -29,18 +30,8 @@ const Signup: React.FC<Props> = ({ history }) => {
             user
         }
         console.log(newUserData)
-        axios.post('/signup', newUserData)
-            .then(res => {
-                console.log(res.data)
-                localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`)
-                setLoading(false)
-                history.push('/');
-            })
-            .catch(err => {
-                console.log(err.response.data)
-                setErrors(err.response.data)
-                setLoading(false)
-            })
+
+        signupUser(newUserData, history)
     }
 
     return (
@@ -82,7 +73,7 @@ const Signup: React.FC<Props> = ({ history }) => {
                                         value={confirmPassword} onIonChange={(e: any) => setConfirmPassword(e.target.value)}>
                                     </IonInput>
                                 </IonItem>
-                                
+
                                 <IonButton disabled={loading ? true : false} expand="full" type="submit" className="button">{loading ? <IonSpinner name="crescent" /> : 'Signup'}</IonButton>
                                 {/* <small>Dont have an account? Sign up <Link to='/signup'>here</Link></small> */}
                             </form>
@@ -95,4 +86,9 @@ const Signup: React.FC<Props> = ({ history }) => {
 
 }
 
-export default Signup;
+const mapStateToProps = (state: any) => ({
+    user: state.user,
+    UI: state.UI
+})
+
+export default connect(mapStateToProps, { signupUser })(Signup);
