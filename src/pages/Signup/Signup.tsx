@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { IonPage, IonContent, IonGrid, IonRow, IonCol, IonText, IonItem, IonLabel, IonInput, IonButton, IonSpinner } from '@ionic/react'
 
-import axios from 'axios';
 import { RouteComponentProps } from 'react-router';
 
 import { connect } from 'react-redux';

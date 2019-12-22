@@ -10,11 +10,15 @@ import {
   IonTabs
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { apps, flash, send } from 'ionicons/icons';
+import { apps, flash, person } from 'ionicons/icons';
 
 import jwtDecode from 'jwt-decode';
+import axios from 'axios';
+
 import { Provider } from 'react-redux'
 import store from './redux/store';
+import { SET_AUTHENTICATED } from './redux/types';
+import { logoutUser, getUserData } from './redux/actions/userActions';
 
 import AuthRoute from './util/AuthRoute';
 import Tab1 from './pages/Tab1';
@@ -42,17 +46,19 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
+import Profile from './pages/Profile/Profile';
 
 
-let authenticated: any;
 const token = localStorage.FBIdToken;
 if (token) {
   const decodedToken: any = jwtDecode(token);
   if (decodedToken.exp * 1000 < Date.now()) {
+    store.dispatch(logoutUser())
     window.location.href = '/login'
-    authenticated = false
   } else {
-    authenticated = true;
+    store.dispatch({ type: SET_AUTHENTICATED })
+    axios.defaults.headers.common['Authorization'] = token;
+    store.dispatch(getUserData());
   }
 }
 
@@ -62,15 +68,15 @@ const App: React.FC = () => (
       <IonReactRouter>
         <IonTabs>
           <IonRouterOutlet>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
+            <AuthRoute exact path="/login" component={Login} />
+            <AuthRoute exact path="/signup" component={Signup} />
 
             <Route path="/tab2" component={Tab2} />
             <Route path="/tab2/details" component={Details} />
-            <Route path="/tab3" component={Tab3} />
+            <Route path="/profile" component={Profile} />
 
             <Route exact path="/" render={() => <Redirect to="/tab1" />} />
-            <AuthRoute exact path="/tab1" component={Tab1} authenticated={authenticated} />
+            <Route exact path="/tab1" component={Tab1} />
 
           </IonRouterOutlet>
 
@@ -84,9 +90,9 @@ const App: React.FC = () => (
               <IonIcon icon={apps} />
               <IonLabel>Tab Two</IonLabel>
             </IonTabButton>
-            <IonTabButton tab="tab3" href="/tab3">
-              <IonIcon icon={send} />
-              <IonLabel>Tab Three</IonLabel>
+            <IonTabButton tab="profile" href="/profile">
+              <IonIcon icon={person} />
+              <IonLabel>Profile</IonLabel>
             </IonTabButton>
           </IonTabBar>
         </IonTabs>

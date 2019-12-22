@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { IonPage, IonContent, IonGrid, IonRow, IonCol, IonText, IonInput, IonItem, IonLabel, IonButton, IonNote, IonSpinner } from '@ionic/react';
-import axios from 'axios';
 import './login.css';
 import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -9,7 +8,6 @@ import { connect } from 'react-redux'
 import { loginUser } from '../../redux/actions/userActions'
 
 interface Props extends RouteComponentProps<any> {
-    handleSubmit: () => any;
     loginUser: Function;
     UI: any;
 }
