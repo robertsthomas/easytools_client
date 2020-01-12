@@ -1,39 +1,39 @@
 #profile-page {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  background: url("../../img/dark-honeycomb.png");
 }
 
-#profile-page .bio {
-  margin-top: 50px;
+#profile-page .bio ion-card {
   width: 100%;
+  height: 100%;
+  background-color: #fff;
+  margin: 0;
+  z-index: 1;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
-#profile-page .bio .bio-card {
-  margin-top: 0px;
-}
-
-#profile-page .bio .bio-card .card-content {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+#profile-page .bio ion-card ion-card-content {
+  margin-top: 20%;
+  height: 100vh;
 }
 
 #profile-page .bio .avatar {
-  border: 3px solid #ccc;
-  bottom: -20px;
-  width: 150px;
-  height: 150px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+#profile-page .bio .avatar ion-avatar {
+  z-index: 2;
+  border: 5px solid #fff;
+  bottom: -70px;
+  width: 160px;
+  height: 160px;
   position: relative;
-  margin: auto;
+  margin: 0 auto 0 20px;
 }
 /*# sourceMappingURL=profile.css.map */

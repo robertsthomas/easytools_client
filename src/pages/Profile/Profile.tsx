@@ -1,27 +1,24 @@
-import React from "react";
-import "./profile.css";
 import {
-  IonHeader,
-  IonToolbar,
-  IonPage,
-  IonTitle,
-  IonContent,
+  IonAvatar,
   IonButton,
   IonCard,
-  IonGrid,
-  IonRow,
-  IonCol,
   IonCardContent,
-  IonAvatar,
+  IonCol,
+  IonContent,
+  IonGrid,
+  IonHeader,
+  IonIcon,
   IonImg,
-  IonText,
-  IonIcon
+  IonPage,
+  IonRow,
+  IonTitle,
+  IonToolbar
 } from "@ionic/react";
 import { create } from "ionicons/icons";
-import { connect, ReactReduxContextValue, ConnectedProps } from "react-redux";
-import { Link } from "react-router-dom";
-
+import React from "react";
+import { connect } from "react-redux";
 import { logoutUser, uploadImage } from "../../redux/actions/userActions";
+import "./profile.css";
 
 interface Props {
   user: any;
@@ -64,30 +61,26 @@ const Profile: React.FC<Props> = ({
       <IonContent>
         <div id="profile-page">
           <div className="bio">
-            <IonAvatar className="avatar">
-              <IonImg class="img" src={imageUrl} />
-            </IonAvatar>
-            <IonCard className="bio-card">
-              <IonCardContent className="card-content">
-                <IonGrid>
-                  <IonRow>
-                    <IonCol>{user}</IonCol>
-                  </IonRow>
-                </IonGrid>
+            <input
+              type="file"
+              id="profile-img-upload"
+              hidden={true}
+              onChange={handleImageChange}
+            />
+            <div className="avatar">
+              <IonButton onClick={handleLogout}>Logout</IonButton>
+              <IonAvatar>
+                <IonImg src={imageUrl} />
+              </IonAvatar>
+              <IonIcon onClick={handleEditImage} size="large" icon={create} />
+            </div>
+
+            <IonCard>
+              <IonCardContent>
+                <p>lorem2040</p>
               </IonCardContent>
             </IonCard>
           </div>
-
-          <input
-            type="file"
-            id="profile-img-upload"
-            hidden={true}
-            onChange={handleImageChange}
-          />
-
-          <IonIcon onClick={handleEditImage} size="large" icon={create} />
-          <br />
-          <IonButton onClick={handleLogout}>Logout</IonButton>
         </div>
       </IonContent>
     </IonPage>
