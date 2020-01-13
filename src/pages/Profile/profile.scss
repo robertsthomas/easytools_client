@@ -1,34 +1,32 @@
 #profile-page {
-  background: url('../../img/dark-honeycomb.png');
-  .bio {
-    ion-card {
-      
-      width: 100%;
-      height: 100%;
-      background-color: #fff;
-      margin: 0;
-      z-index: 1;
-      border-radius: 0;
-      box-shadow: none;
-      
-      ion-card-content {
-        margin-top: 20%;
-        height: 100vh;
-      }
-    }
-    .avatar {
-      display: flex;
-      align-items: flex-end;
-      ion-avatar {
-      z-index: 2;
-      border: 5px solid #fff;
-      bottom: -70px;
-        width: 160px;
-        height: 160px;
-        position: relative;
-        margin: 0 auto 0 20px;
-      }
-    }
-    
-  }
+	background: url("../../img/dark-honeycomb.png");
+	.avatar {
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		ion-avatar {
+			z-index: 2;
+			border: 5px solid #fff;
+			bottom: -70px;
+			width: 160px;
+			height: 160px;
+			position: relative;
+		}
+	}
+	.bio {
+		ion-card {
+			width: 100%;
+			max-height: 100vh;
+			--background: #fff;
+			margin: 0;
+			z-index: 1;
+			border-radius: 0;
+			box-shadow: none;
+
+			ion-card-content {
+				padding-top: 20%;
+				overflow: auto;
+			}
+		}
+	}
 }

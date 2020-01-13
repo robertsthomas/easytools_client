@@ -2,10 +2,31 @@
   background: url("../../img/dark-honeycomb.png");
 }
 
+#profile-page .avatar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#profile-page .avatar ion-avatar {
+  z-index: 2;
+  border: 5px solid #fff;
+  bottom: -70px;
+  width: 160px;
+  height: 160px;
+  position: relative;
+}
+
 #profile-page .bio ion-card {
   width: 100%;
-  height: 100%;
-  background-color: #fff;
+  max-height: 100vh;
+  --background: #fff;
   margin: 0;
   z-index: 1;
   border-radius: 0;
@@ -14,26 +35,7 @@
 }
 
 #profile-page .bio ion-card ion-card-content {
-  margin-top: 20%;
-  height: 100vh;
-}
-
-#profile-page .bio .avatar {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
-}
-
-#profile-page .bio .avatar ion-avatar {
-  z-index: 2;
-  border: 5px solid #fff;
-  bottom: -70px;
-  width: 160px;
-  height: 160px;
-  position: relative;
-  margin: 0 auto 0 20px;
+  padding-top: 20%;
+  overflow: auto;
 }
 /*# sourceMappingURL=profile.css.map */
