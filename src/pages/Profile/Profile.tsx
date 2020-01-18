@@ -3,9 +3,7 @@ import {
 	IonButton,
 	IonCard,
 	IonCardContent,
-	IonCol,
 	IonContent,
-	IonGrid,
 	IonHeader,
 	IonIcon,
 	IonImg,
@@ -19,8 +17,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { logoutUser, uploadImage } from "../../redux/actions/userActions";
 import "./profile.css";
+import { RouteComponentProps } from "react-router";
 
-interface Props {
+interface Props extends RouteComponentProps<any> {
 	user: any;
 	uploadImage: any;
 	logoutUser: any;
@@ -33,7 +32,8 @@ const Profile: React.FC<Props> = ({
 		credentials: { user, createdAt, imageUrl, bio, website, location },
 		loading,
 		authenticated
-	}
+	},
+	history
 }) => {
 	const handleImageChange = (event: any) => {
 		const image = event.target.files[0];
@@ -48,7 +48,7 @@ const Profile: React.FC<Props> = ({
 	};
 
 	const handleLogout = () => {
-		logoutUser();
+		logoutUser(history);
 	};
 
 	return (
