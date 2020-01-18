@@ -11,3 +11,4 @@ export const LOADING_UI = "LOADING_UI";
 
 // Tools Reducer Types
 export const LOADING_TOOLS = "LOADING_TOOLS";
+export const SET_TOOLS = "SET_TOOLS";
