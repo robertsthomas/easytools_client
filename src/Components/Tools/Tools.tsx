@@ -16,7 +16,7 @@ const Tools: React.FC<Props> = ({ tools, getTools }) => {
 
   return (
     <div>
-      <p>{tools ? "Tools loaded" : "Tools not found"}</p>
+      <p>{tools.length > 0 ? "Tools loaded" : "Tools not found"}</p>
     </div>
   );
 };

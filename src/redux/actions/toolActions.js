@@ -5,6 +5,7 @@ export const getTools = () => dispatch => {
   axios
     .get("/tools")
     .then(res => {
+      console.log(res);
       dispatch({
         type: SET_TOOLS,
         payload: res.data
