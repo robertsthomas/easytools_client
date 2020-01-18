@@ -11,10 +11,7 @@ import {
 import { RouteComponentProps } from "react-router";
 import { connect } from "react-redux";
 import "./Home.css";
-
 import Tools from "../../Components/Tools/Tools";
-
-interface Props {}
 
 const Home: React.FC = () => {
   return (

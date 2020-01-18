@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+<<<<<<< HEAD
 
 import { connect } from "react-redux";
 
@@ -30,3 +31,22 @@ const mapActionsToProps = {
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(Tools);
+=======
+import axios from "axios";
+
+interface Props {}
+
+const Tools: React.FC<Props> = () => {
+	useEffect(() => {
+		axios.get("/tools").then(() => console.log("searching tools"));
+	}, []);
+
+	return (
+		<div>
+			<p>No Tools Found</p>
+		</div>
+	);
+};
+
+export default Tools;
+>>>>>>> e9ac60b9c0936a62140e3fbd5bdfffde273a06e6
