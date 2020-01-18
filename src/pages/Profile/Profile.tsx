@@ -5,20 +5,21 @@ import {
   IonCardContent,
   IonContent,
   IonHeader,
+  IonIcon,
   IonImg,
   IonPage,
-  IonSegment,
+  IonRow,
   IonTitle,
-  IonToolbar,
-  IonSegmentButton,
-  IonLabel
+  IonToolbar
 } from "@ionic/react";
 import React from "react";
 import { connect } from "react-redux";
 import { logoutUser, uploadImage } from "../../redux/actions/userActions";
 import "./profile.css";
+import { RouteComponentProps } from "react-router";
+import { create } from "ionicons/icons";
 
-interface Props {
+interface Props extends RouteComponentProps<any> {
   user: any;
   uploadImage: any;
   logoutUser: any;
@@ -31,7 +32,8 @@ const Profile: React.FC<Props> = ({
     credentials: { user, createdAt, imageUrl, bio, website, location },
     loading,
     authenticated
-  }
+  },
+  history
 }) => {
   const handleImageChange = (event: any) => {
     const image = event.target.files[0];
@@ -46,7 +48,7 @@ const Profile: React.FC<Props> = ({
   };
 
   const handleLogout = () => {
-    logoutUser();
+    logoutUser(history);
   };
 
   return (
@@ -60,35 +62,32 @@ const Profile: React.FC<Props> = ({
         <div id="profile-page">
           {/* Bio section */}
           <div className="avatar">
-            <IonAvatar onClick={handleEditImage}>
+            <IonButton onClick={handleLogout}>Logout</IonButton>
+            <IonAvatar>
               <IonImg src={imageUrl} />
             </IonAvatar>
-            <IonButton
-              className="logout-button"
-              size="small"
-              onClick={handleLogout}
-            >
-              Logout
-            </IonButton>
             <input
               type="file"
               id="profile-img-upload"
               hidden={true}
               onChange={handleImageChange}
             />
+            <IonIcon onClick={handleEditImage} size="large" icon={create} />
           </div>
           <div className="bio">
             <IonCard>
               <IonCardContent>
-                {/* Segment Section */}
-                <IonSegment value="enemies">
-                  <IonSegmentButton value="friends">
-                    <IonLabel>Friends</IonLabel>
-                  </IonSegmentButton>
-                  <IonSegmentButton value="enemies">
-                    <IonLabel>Enemies</IonLabel>
-                  </IonSegmentButton>
-                </IonSegment>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                  Repellat amet omnis laboriosam eaque minus impedit deserunt,
+                  cumque distinctio architecto alias optio tenetur voluptates
+                  veniam consequuntur tempore voluptatum, a placeat quo fuga,
+                  dolor debitis magnam nobis labore consectetur! Magni adipisci
+                  similique odio repellendus nobis. Vel itaque nihil, cupiditate
+                  suscipit excepturi facere accusamus dolores officia quasi
+                  similique dolore voluptates possimus consequatur ad labore est
+                  repel
+                </p>
               </IonCardContent>
             </IonCard>
           </div>
