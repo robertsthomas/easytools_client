@@ -1,32 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, EffectCallback } from "react";
 
 import { connect } from "react-redux";
 
 import { getTools } from "../../redux/actions/toolActions";
 
 interface Props {
-  tools: any;
-  getTools: any;
+	toolState: any;
+	getTools: any;
 }
 
-const Tools: React.FC<Props> = ({ tools, getTools }) => {
-  useEffect(() => {
-    getTools();
-  }, []);
+const Tools: React.FC<Props> = ({ toolState, getTools }) => {
+	useEffect(() => {
+		getTools();
+	}, []);
 
-  return (
-    <div>
-      <p>{tools.length > 0 ? "Tools loaded" : "Tools not found"}</p>
-    </div>
-  );
+	return (
+		<div>
+			<p>{toolState.loadingTools ? "loading" : "not loading"}</p>
+		</div>
+	);
 };
 
 const mapStateToProps = (state: any) => ({
-  tools: state.tools
+	toolState: state.tools
 });
 
 const mapActionsToProps = {
-  getTools
+	getTools
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(Tools);
