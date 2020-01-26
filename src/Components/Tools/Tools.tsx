@@ -1,7 +1,6 @@
-import React, { useEffect, EffectCallback } from "react";
+import React, { useEffect } from "react";
 
 import { connect } from "react-redux";
-
 import { getTools } from "../../redux/actions/toolActions";
 
 interface Props {

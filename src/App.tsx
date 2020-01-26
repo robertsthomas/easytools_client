@@ -73,18 +73,16 @@ const App: React.FC = () => {
 	const [tutorialComplete, setTutComplete] = useState(false);
 
 	useEffect(() => {
-		async function checkForTutorialComplete() {
+		(async () => {
 			const ret = await Storage.get({ key: "tutorialComplete" });
 			const complete = ret.value && JSON.parse(ret.value);
-			console.log(complete);
+			console.log("tutorial complete:", complete);
 
 			if (complete) {
 				setTutComplete(complete);
 			}
-		}
-
-		checkForTutorialComplete();
-	}, [tutorialComplete]);
+		})();
+	}, []);
 
 	return (
 		<Provider store={store}>
@@ -105,7 +103,7 @@ const App: React.FC = () => {
 
 								<Route path='/tab2' component={Tab2} />
 								<Route path='/tab2/details' component={Details} />
-								<Route path='/profile' component={Profile} />
+								<AuthRoute path='/profile' component={Profile} />
 
 								<Route path='/intro' component={Intro} />
 

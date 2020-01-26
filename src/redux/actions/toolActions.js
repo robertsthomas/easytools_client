@@ -6,13 +6,10 @@ export const getTools = () => dispatch => {
 	axios
 		.get("/tools")
 		.then(res => {
-			// TODO: Remove setTimeout
-			setTimeout(() => {
-				dispatch({
-					type: SET_TOOLS,
-					payload: res.data
-				});
-			}, 2000);
+			dispatch({
+				type: SET_TOOLS,
+				payload: res.data
+			});
 		})
 		.catch(err => console.log(err));
 };
