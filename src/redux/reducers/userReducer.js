@@ -9,6 +9,7 @@ import {
 
 const initState = {
 	authenticated: false,
+	tutorialComplete: false,
 	loading: false,
 	credentials: {}
 };

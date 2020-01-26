@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+// TODO:
+// Add Capacitor Storage
+
+import React, { useState, useEffect } from "react";
 import { Redirect, Route } from "react-router-dom";
 import {
 	IonApp,
@@ -25,6 +28,8 @@ import Home from "./pages/Home/Home";
 import Tab2 from "./pages/Tab2";
 import Details from "./pages/Details";
 
+import { Plugins } from "@capacitor/core";
+
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -49,6 +54,8 @@ import Profile from "./pages/Profile/Profile";
 import Intro from "./pages/Intro/Intro";
 // import IntroRoute from "./util/IntroRoute";
 
+const { Storage } = Plugins;
+
 const token = localStorage.FBIdToken;
 if (token) {
 	const decodedToken: any = jwtDecode(token);
@@ -65,56 +72,74 @@ if (token) {
 const App: React.FC = () => {
 	const [tutorialComplete, setTutComplete] = useState(false);
 
-	if (tutorialComplete) {
-		console.log("tutorial complete");
-	} else {
-		console.log("tutorial not complete");
-	}
+	useEffect(() => {
+		async function checkForTutorialComplete() {
+			const { keys } = await Storage.keys();
+			console.log(keys);
 
-	setTimeout(() => {
-		setTutComplete(true);
-	}, 3000);
+			const ret = await Storage.get({ key: "tutorialComplete" });
+			const complete = ret.value && JSON.parse(ret.value);
+
+			if (complete) {
+				setTutComplete(complete);
+			}
+		}
+
+		checkForTutorialComplete();
+	});
 
 	return (
 		<Provider store={store}>
 			<IonApp>
 				<IonReactRouter>
-					<IonTabs>
+					{!tutorialComplete ? (
 						<IonRouterOutlet>
-							<AuthRoute exact path='/login' component={Login} />
-							<AuthRoute exact path='/signup' component={Signup} />
-
-							<Route path='/tab2' component={Tab2} />
-							<Route path='/tab2/details' component={Details} />
-							<Route path='/profile' component={Profile} />
-
-							<Route path='/intro' component={Intro} />
-
-							<Route
-								exact
-								path='/'
-								render={() =>
-									tutorialComplete ? <Redirect to='/home' /> : <div>Inro</div>
-								}
-							/>
-							<Route exact path='/home' component={Home} />
+							<Route exact path='/'>
+								<Intro />
+							</Route>
 						</IonRouterOutlet>
+					) : (
+						<IonTabs>
+							<IonRouterOutlet>
+								<AuthRoute exact path='/login' component={Login} />
+								<AuthRoute exact path='/signup' component={Signup} />
 
-						<IonTabBar slot='bottom'>
-							<IonTabButton tab='tab1' href='/home'>
-								<IonIcon icon={home} />
-								<IonLabel>Home</IonLabel>
-							</IonTabButton>
-							<IonTabButton tab='tab2' href='/tab2'>
-								<IonIcon icon={apps} />
-								<IonLabel>Tab Two</IonLabel>
-							</IonTabButton>
-							<IonTabButton tab='profile' href='/profile'>
-								<IonIcon icon={person} />
-								<IonLabel>Profile</IonLabel>
-							</IonTabButton>
-						</IonTabBar>
-					</IonTabs>
+								<Route path='/tab2' component={Tab2} />
+								<Route path='/tab2/details' component={Details} />
+								<Route path='/profile' component={Profile} />
+
+								<Route path='/intro' component={Intro} />
+
+								<Route
+									exact
+									path='/'
+									render={() =>
+										tutorialComplete ? (
+											<Redirect to='/home' />
+										) : (
+											<Redirect to='/intro' />
+										)
+									}
+								/>
+								<Route exact path='/home' component={Home} />
+							</IonRouterOutlet>
+
+							<IonTabBar slot='bottom'>
+								<IonTabButton tab='tab1' href='/home'>
+									<IonIcon icon={home} />
+									<IonLabel>Home</IonLabel>
+								</IonTabButton>
+								<IonTabButton tab='tab2' href='/tab2'>
+									<IonIcon icon={apps} />
+									<IonLabel>Tab Two</IonLabel>
+								</IonTabButton>
+								<IonTabButton tab='profile' href='/profile'>
+									<IonIcon icon={person} />
+									<IonLabel>Profile</IonLabel>
+								</IonTabButton>
+							</IonTabBar>
+						</IonTabs>
+					)}
 				</IonReactRouter>
 			</IonApp>
 		</Provider>

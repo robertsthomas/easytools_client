@@ -7,6 +7,7 @@ import {
 	IonSlides,
 	IonButton
 } from "@ionic/react";
+import { Storage } from "@capacitor/core";
 
 const Intro: React.FC<{}> = () => {
 	return (
@@ -21,6 +22,18 @@ const Intro: React.FC<{}> = () => {
 					</IonSlide>
 					<IonSlide>
 						<p>Slide Three</p>
+						<IonButton
+							onClick={() =>
+								Storage.set({
+									key: "tutorialComplete",
+									value: "true"
+								}).then(() => {
+									window.location.href = "/";
+								})
+							}
+						>
+							Done
+						</IonButton>
 					</IonSlide>
 				</IonSlides>
 			</IonContent>
