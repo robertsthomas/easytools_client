@@ -103,7 +103,7 @@ const App: React.FC = () => {
 
 								<Route path='/tab2' component={Tab2} />
 								<Route path='/tab2/details' component={Details} />
-								<AuthRoute path='/profile' component={Profile} />
+								<Route path='/profile' component={Profile} />
 
 								<Route path='/intro' component={Intro} />
 
