@@ -1,5 +1,5 @@
 // TODO:
-// Add Capacitor Storage
+// Switch tutorialComplete from Storage to Redux
 
 import React, { useState, useEffect } from "react";
 import { Redirect, Route } from "react-router-dom";
@@ -74,11 +74,9 @@ const App: React.FC = () => {
 
 	useEffect(() => {
 		async function checkForTutorialComplete() {
-			const { keys } = await Storage.keys();
-			console.log(keys);
-
 			const ret = await Storage.get({ key: "tutorialComplete" });
 			const complete = ret.value && JSON.parse(ret.value);
+			console.log(complete);
 
 			if (complete) {
 				setTutComplete(complete);
@@ -86,7 +84,7 @@ const App: React.FC = () => {
 		}
 
 		checkForTutorialComplete();
-	});
+	}, [tutorialComplete]);
 
 	return (
 		<Provider store={store}>
@@ -94,6 +92,7 @@ const App: React.FC = () => {
 				<IonReactRouter>
 					{!tutorialComplete ? (
 						<IonRouterOutlet>
+							<Route exact path='/home' render={() => <Redirect to='/' />} />
 							<Route exact path='/'>
 								<Intro />
 							</Route>
@@ -110,17 +109,7 @@ const App: React.FC = () => {
 
 								<Route path='/intro' component={Intro} />
 
-								<Route
-									exact
-									path='/'
-									render={() =>
-										tutorialComplete ? (
-											<Redirect to='/home' />
-										) : (
-											<Redirect to='/intro' />
-										)
-									}
-								/>
+								<Route exact path='/' render={() => <Redirect to='/home' />} />
 								<Route exact path='/home' component={Home} />
 							</IonRouterOutlet>
 

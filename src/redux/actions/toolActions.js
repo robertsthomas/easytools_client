@@ -6,6 +6,7 @@ export const getTools = () => dispatch => {
 	axios
 		.get("/tools")
 		.then(res => {
+			// TODO: Remove setTimeout
 			setTimeout(() => {
 				dispatch({
 					type: SET_TOOLS,

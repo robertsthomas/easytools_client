@@ -16,7 +16,9 @@ const Tools: React.FC<Props> = ({ toolState, getTools }) => {
 
 	return (
 		<div>
-			<p>{toolState.loadingTools ? "loading" : "not loading"}</p>
+			<p>
+				{toolState.loadingTools ? "loading" : JSON.stringify(toolState.tools)}
+			</p>
 		</div>
 	);
 };
