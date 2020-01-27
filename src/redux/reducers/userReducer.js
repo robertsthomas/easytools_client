@@ -23,7 +23,10 @@ export default function(state = initState, action) {
 			};
 
 		case SET_UNAUTHENTECATED:
-			return initState;
+			return {
+				...state,
+				authenticated: false
+			};
 
 		case SET_USER:
 			return {

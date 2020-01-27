@@ -2,7 +2,8 @@ import {
 	SET_USER,
 	LOADING_UI,
 	SET_AUTHENTICATED,
-	LOADING_USER
+	LOADING_USER,
+	SET_UNAUTHENTECATED
 } from "../types";
 import axios from "axios";
 
@@ -36,11 +37,11 @@ export const signupUser = (newUserData, history) => dispatch => {
 		});
 };
 
-export const logoutUser = history => dispatch => {
+export const logoutUser = history => async dispatch => {
 	localStorage.removeItem("FBIdToken");
 	delete axios.defaults.headers.common["Authorization"];
-	dispatch({ type: SET_AUTHENTICATED });
-	history.push("/");
+	await dispatch({ type: SET_UNAUTHENTECATED });
+	history.replace("/home");
 };
 
 export const getUserData = () => dispatch => {

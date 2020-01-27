@@ -13,7 +13,7 @@ import {
 	IonTabs
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { apps, person, home } from "ionicons/icons";
+import { person, home, add } from "ionicons/icons";
 
 import jwtDecode from "jwt-decode";
 import axios from "axios";
@@ -26,7 +26,6 @@ import { logoutUser, getUserData } from "./redux/actions/userActions";
 import AuthRoute from "./util/AuthRoute";
 import Home from "./pages/Home/Home";
 import Tab2 from "./pages/Tab2";
-import Details from "./pages/Details";
 
 import { Plugins } from "@capacitor/core";
 
@@ -101,8 +100,8 @@ const App: React.FC = () => {
 								<AuthRoute exact path='/login' component={Login} />
 								<AuthRoute exact path='/signup' component={Signup} />
 
-								<Route path='/tab2' component={Tab2} />
-								<Route path='/tab2/details' component={Details} />
+								<Route path='/add' component={Tab2} />
+								{/* <Route path='/add/details' component={Details} /> */}
 								<Route path='/profile' component={Profile} />
 
 								<Route path='/intro' component={Intro} />
@@ -114,15 +113,12 @@ const App: React.FC = () => {
 							<IonTabBar slot='bottom'>
 								<IonTabButton tab='tab1' href='/home'>
 									<IonIcon icon={home} />
-									<IonLabel>Home</IonLabel>
 								</IonTabButton>
-								<IonTabButton tab='tab2' href='/tab2'>
-									<IonIcon icon={apps} />
-									<IonLabel>Tab Two</IonLabel>
+								<IonTabButton tab='add' href='/add'>
+									<IonIcon icon={add} />
 								</IonTabButton>
 								<IonTabButton tab='profile' href='/profile'>
 									<IonIcon icon={person} />
-									<IonLabel>Profile</IonLabel>
 								</IonTabButton>
 							</IonTabBar>
 						</IonTabs>
