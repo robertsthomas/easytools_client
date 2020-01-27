@@ -1,0 +1,13 @@
+ion-icon.ico {
+  font-size: 50px;
+  color: #a2a4ab;
+}
+
+.add-photo-text {
+  color: var(--ion-color-medium-tint);
+}
+
+ion-slides.post-slides {
+  height: 100%;
+}
+/*# sourceMappingURL=style.css.map */

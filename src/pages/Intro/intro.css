@@ -1,4 +1,4 @@
-ion-slides {
+ion-slides.intro-slides {
   height: 100vh;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -6,7 +6,7 @@ ion-slides {
           flex-direction: column;
 }
 
-ion-slides:first-child {
+ion-slides.intro-slides:first-child {
   background: red;
 }
 /*# sourceMappingURL=intro.css.map */

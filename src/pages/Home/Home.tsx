@@ -1,11 +1,13 @@
 import React from "react";
 
 import {
-	IonContent,
-	IonHeader,
-	IonPage,
-	IonTitle,
-	IonToolbar
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonRefresher,
+  IonRefresherContent
 } from "@ionic/react";
 // import { book, build, colorFill, grid } from "ionicons/icons";
 import { RouteComponentProps } from "react-router";
@@ -14,18 +16,30 @@ import "./Home.css";
 import Tools from "../../Components/Tools/Tools";
 
 const Home: React.FC = () => {
-	return (
-		<IonPage>
-			<IonHeader>
-				<IonToolbar>
-					<IonTitle>Home</IonTitle>
-				</IonToolbar>
-			</IonHeader>
-			<IonContent>
-				<Tools />
-			</IonContent>
-		</IonPage>
-	);
+  const doRefresh = (event: any) => {
+    console.log("Begin async operation");
+
+    setTimeout(() => {
+      console.log("Async operation has ended");
+      event.detail.complete();
+    }, 2000);
+  };
+
+  return (
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle>Home</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent>
+        <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
+          <IonRefresherContent></IonRefresherContent>
+        </IonRefresher>
+        <Tools />
+      </IonContent>
+    </IonPage>
+  );
 };
 
 const mapStateToProps = (state: any) => ({});
