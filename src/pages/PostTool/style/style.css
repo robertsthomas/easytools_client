@@ -10,4 +10,22 @@ ion-icon.ico {
 ion-slides.post-slides {
   height: 100%;
 }
+
+ion-grid {
+  height: 100%;
+}
+
+ion-grid ion-thumbnail {
+  margin: 0px auto;
+  --size: 200px;
+  --border-radius: 10px;
+}
+
+#slide2 ion-item {
+  width: 100%;
+}
+
+form {
+  width: 100%;
+}
 /*# sourceMappingURL=style.css.map */

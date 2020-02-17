@@ -16,21 +16,18 @@ import {
 	IonSlides,
 	IonSlide,
 	IonImg,
-	IonButton
+	IonButton,
+	IonThumbnail,
+	IonList
 } from "@ionic/react";
 import { addCircle } from "ionicons/icons";
 import "./style/style.css";
-
-declare var ml5: any;
 
 const PostTool: React.FC = () => {
 	const swiperRef = useRef<HTMLIonSlidesElement>(null);
 	const [preview, setPreview] = useState();
 
-	useEffect(() => {
-		if (swiperRef && swiperRef.current)
-			swiperRef.current.isEnd().then(console.log);
-	}, []);
+	useEffect(() => {}, []);
 
 	// Add image to view on upload
 
@@ -46,10 +43,10 @@ const PostTool: React.FC = () => {
 		let image = event.target.files[0];
 
 		reader.onloadend = () => {
-			setPreview(reader.result);
-
 			if (swiperRef != null && swiperRef.current != null) {
-				swiperRef.current.slideNext();
+				swiperRef.current.slideNext().then(() => {
+					setPreview(reader.result);
+				});
 			}
 		};
 
@@ -64,7 +61,7 @@ const PostTool: React.FC = () => {
 				</IonToolbar>
 			</IonHeader>
 			<IonContent>
-				<IonSlides className='post-slides' ref={swiperRef}>
+				<IonSlides className='post-slides swiper-no-swiping' ref={swiperRef}>
 					{/* SLIDE 1: Add Photo Slide */}
 					<IonSlide>
 						<IonGrid className='ion-no-padding' style={{ height: "100%" }}>
@@ -101,7 +98,33 @@ const PostTool: React.FC = () => {
 					{/* End Add Photo Slide */}
 
 					{/* SLIDE 2: Photo ML details and post info */}
-					<IonSlide>{preview && <img src={preview} />}</IonSlide>
+					<IonSlide id='slide2'>
+						<IonGrid>
+							<IonRow>
+								<IonThumbnail>
+									{preview ? <img id='mlimg' src={preview} /> : <img src='' />}
+								</IonThumbnail>
+							</IonRow>
+							<IonRow>
+								<form>
+									<IonList>
+										<IonItem>
+											<IonLabel position='stacked'>Title</IonLabel>
+											<IonInput></IonInput>
+										</IonItem>
+										<IonItem>
+											<IonLabel position='stacked'>Title</IonLabel>
+											<IonInput></IonInput>
+										</IonItem>
+										<IonItem>
+											<IonLabel position='stacked'>Title</IonLabel>
+											<IonInput></IonInput>
+										</IonItem>
+									</IonList>
+								</form>
+							</IonRow>
+						</IonGrid>
+					</IonSlide>
 					{/* END Photo ML details and post info */}
 				</IonSlides>
 			</IonContent>
