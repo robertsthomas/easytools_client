@@ -1,0 +1,10 @@
+#slide2 ion-thumbnail {
+  margin: 0px auto;
+  --size: 200px;
+  --border-radius: 10px;
+}
+
+#slide2 form {
+  width: 100%;
+}
+/*# sourceMappingURL=slide2.css.map */
