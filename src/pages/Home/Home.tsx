@@ -1,18 +1,18 @@
 import React from "react";
 
 import {
-	IonContent,
-	IonHeader,
-	IonPage,
-	IonTitle,
-	IonToolbar,
-	IonRefresher,
-	IonRefresherContent,
-	IonChip,
-	IonLabel,
-	IonSearchbar,
-	IonSlides,
-	IonSlide
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonRefresher,
+  IonRefresherContent,
+  IonChip,
+  IonLabel,
+  IonSearchbar,
+  IonSlides,
+  IonSlide
 } from "@ionic/react";
 // import { book, build, colorFill, grid } from "ionicons/icons";
 import { RouteComponentProps } from "react-router";
@@ -22,34 +22,34 @@ import Tools from "../../Components/Tools/Tools";
 import HomeCards from "../../Components/HomeCards/HomeCards";
 
 const Home: React.FC = () => {
-	const doRefresh = (event: any) => {
-		console.log("Begin async operation");
+  const doRefresh = (event: any) => {
+    console.log("Begin async operation");
 
-		setTimeout(() => {
-			console.log("Async operation has ended");
-			event.detail.complete();
-		}, 2000);
-	};
+    setTimeout(() => {
+      console.log("Async operation has ended");
+      event.detail.complete();
+    }, 2000);
+  };
 
-	return (
-		<IonPage>
-			<IonHeader>
-				<IonToolbar>
-					<IonSearchbar style={{ paddingTop: 15 }}></IonSearchbar>
-				</IonToolbar>
-			</IonHeader>
-			<IonContent>
-				<IonRefresher slot='fixed' onIonRefresh={doRefresh}>
-					<IonRefresherContent></IonRefresherContent>
-				</IonRefresher>
-				<IonChip>
-					<IonLabel>Default</IonLabel>
-				</IonChip>
-				<HomeCards />
-				<Tools />
-			</IonContent>
-		</IonPage>
-	);
+  return (
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonSearchbar mode="ios" style={{ paddingTop: 15 }}></IonSearchbar>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent>
+        <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
+          <IonRefresherContent></IonRefresherContent>
+        </IonRefresher>
+        <IonChip>
+          <IonLabel>Default</IonLabel>
+        </IonChip>
+        <HomeCards />
+        <Tools />
+      </IonContent>
+    </IonPage>
+  );
 };
 
 const mapStateToProps = (state: any) => ({});
