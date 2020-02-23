@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 
 import { connect } from "react-redux";
 import { getTools } from "../../redux/actions/toolActions";
+import { IonSpinner } from "@ionic/react";
 
 interface Props {
 	toolState: any;
@@ -14,9 +15,13 @@ const Tools: React.FC<Props> = ({ toolState, getTools }) => {
 	}, []);
 
 	return (
-		<div>
+		<div style={{ padding: "0px 10px" }}>
 			<p>
-				{toolState.loadingTools ? "loading" : JSON.stringify(toolState.tools)}
+				{toolState.loadingTools ? (
+					<IonSpinner></IonSpinner>
+				) : (
+					JSON.stringify(toolState.tools)
+				)}
 			</p>
 		</div>
 	);

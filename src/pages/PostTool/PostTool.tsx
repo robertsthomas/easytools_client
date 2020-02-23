@@ -1,62 +1,82 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  IonGrid,
-  IonRow,
-  IonInput,
-  IonLabel,
-  IonItem,
-  IonIcon,
-  IonCol,
-  IonText,
-  IonSlides,
-  IonSlide,
-  IonImg,
-  IonButton,
-  IonThumbnail,
-  IonList
+	IonContent,
+	IonHeader,
+	IonPage,
+	IonTitle,
+	IonToolbar
 } from "@ionic/react";
 import { addCircle } from "ionicons/icons";
 import "./style/style.css";
 import Slide1 from "./Slide1/Slide1";
 import Slide2 from "./Slide2/Slide2";
+import { postTool } from "../../redux/actions/toolActions";
 
-const PostTool: React.FC = () => {
-  const [preview, setPreview] = useState();
-  const [slide, setSlide] = useState(2);
+interface Props {
+	UI: any;
+	postTool: any;
+}
 
-  useEffect(() => {}, []);
+const PostTool: React.FC<Props> = ({ UI: { loading }, postTool }) => {
+	let history = useHistory();
+	const [preview, setPreview] = useState();
+	const [slide, setSlide] = useState(2);
 
-  const nextSlide = () => {
-    setSlide(slide + 1);
-  };
+	const [toolValues, setToolValues] = useState({
+		name: ""
+	});
 
-  return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Post A Tool</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent>
-        <div className="post-tool">
-          {(() => {
-            switch (slide) {
-              case 1:
-                return <Slide1 setPreview={setPreview} nextSlide={nextSlide} />;
+	useEffect(() => {}, []);
 
-              case 2:
-                return <Slide2 preview={preview} />;
-            }
-          })()}
-        </div>
-      </IonContent>
-    </IonPage>
-  );
+	const handleToolChange = (e: any) => {
+		setToolValues({ ...toolValues, [e.target.name]: e.target.value });
+		console.log([e.target.name], e.target.value);
+	};
+
+	const handleToolSubmit = async (e: any) => {
+		e.preventDefault();
+		await postTool(toolValues);
+		history.push("/");
+	};
+
+	const nextSlide = () => {
+		setSlide(slide + 1);
+	};
+
+	return (
+		<IonPage>
+			<IonHeader>
+				<IonToolbar>
+					<IonTitle>Post A Tool</IonTitle>
+				</IonToolbar>
+			</IonHeader>
+			<IonContent>
+				<div className='post-tool'>
+					{(() => {
+						switch (slide) {
+							case 1:
+								return <Slide1 setPreview={setPreview} nextSlide={nextSlide} />;
+
+							case 2:
+								return (
+									<Slide2
+										handleToolSubmit={handleToolSubmit}
+										handleToolChange={handleToolChange}
+										preview={preview}
+									/>
+								);
+						}
+					})()}
+				</div>
+			</IonContent>
+		</IonPage>
+	);
 };
 
-export default PostTool;
+const mapStateToProps = (state: any) => ({
+	UI: state.UI
+});
+
+export default connect(mapStateToProps, { postTool })(PostTool);

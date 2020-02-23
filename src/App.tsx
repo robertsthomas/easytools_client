@@ -4,13 +4,13 @@
 import React, { useState, useEffect } from "react";
 import { Redirect, Route } from "react-router-dom";
 import {
-  IonApp,
-  IonIcon,
-  IonLabel,
-  IonRouterOutlet,
-  IonTabBar,
-  IonTabButton,
-  IonTabs
+	IonApp,
+	IonIcon,
+	IonLabel,
+	IonRouterOutlet,
+	IonTabBar,
+	IonTabButton,
+	IonTabs
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { person, home, add } from "ionicons/icons";
@@ -53,82 +53,82 @@ import Intro from "./pages/Intro/Intro";
 import PostTool from "./pages/PostTool/PostTool";
 // import IntroRoute from "./util/IntroRoute";
 
-const { Storage } = Plugins;
+const { Storage, StatusBar } = Plugins;
 
-declare var ml5: any;
+// StatusBar.show();
 
 const token = localStorage.FBIdToken;
 if (token) {
-  const decodedToken: any = jwtDecode(token);
-  if (decodedToken.exp * 1000 < Date.now()) {
-    store.dispatch(logoutUser());
-    window.location.href = "/login";
-  } else {
-    store.dispatch({ type: SET_AUTHENTICATED });
-    axios.defaults.headers.common["Authorization"] = token;
-    store.dispatch(getUserData());
-  }
+	const decodedToken: any = jwtDecode(token);
+	if (decodedToken.exp * 1000 < Date.now()) {
+		store.dispatch(logoutUser());
+		window.location.href = "/login";
+	} else {
+		store.dispatch({ type: SET_AUTHENTICATED });
+		axios.defaults.headers.common["Authorization"] = token;
+		store.dispatch(getUserData());
+	}
 }
 
 const App: React.FC = () => {
-  const [tutorialComplete, setTutComplete] = useState(false);
+	const [tutorialComplete, setTutComplete] = useState(false);
 
-  useEffect(() => {
-    (async () => {
-      const ret = await Storage.get({ key: "tutorialComplete" });
-      const complete = ret.value && JSON.parse(ret.value);
-      console.log("tutorial complete:", complete);
+	useEffect(() => {
+		(async () => {
+			const ret = await Storage.get({ key: "tutorialComplete" });
+			const complete = ret.value && JSON.parse(ret.value);
+			console.log("tutorial complete:", complete);
 
-      if (complete) {
-        setTutComplete(complete);
-      }
-    })();
-  }, []);
+			if (complete) {
+				setTutComplete(complete);
+			}
+		})();
+	}, []);
 
-  return (
-    <Provider store={store}>
-      <IonApp>
-        <IonReactRouter>
-          {!tutorialComplete ? (
-            <IonRouterOutlet>
-              <Route exact path="/home" render={() => <Redirect to="/" />} />
-              <Route exact path="/">
-                <Intro />
-              </Route>
-            </IonRouterOutlet>
-          ) : (
-            <IonTabs>
-              <IonRouterOutlet>
-                <AuthRoute exact path="/login" component={Login} />
-                <AuthRoute exact path="/signup" component={Signup} />
+	return (
+		<Provider store={store}>
+			<IonApp>
+				<IonReactRouter>
+					{!tutorialComplete ? (
+						<IonRouterOutlet>
+							<Route exact path='/home' render={() => <Redirect to='/' />} />
+							<Route exact path='/'>
+								<Intro />
+							</Route>
+						</IonRouterOutlet>
+					) : (
+						<IonTabs>
+							<IonRouterOutlet>
+								<AuthRoute exact path='/login' component={Login} />
+								<AuthRoute exact path='/signup' component={Signup} />
 
-                <Route path="/add" component={PostTool} />
-                {/* <Route path='/add/details' component={Details} /> */}
-                <Route path="/profile" component={Profile} />
+								<Route path='/add' component={PostTool} />
+								{/* <Route path='/add/details' component={Details} /> */}
+								<Route path='/profile' component={Profile} />
 
-                <Route path="/intro" component={Intro} />
+								<Route path='/intro' component={Intro} />
 
-                <Route exact path="/" render={() => <Redirect to="/home" />} />
-                <Route exact path="/home" component={Home} />
-              </IonRouterOutlet>
+								<Route exact path='/' render={() => <Redirect to='/home' />} />
+								<Route exact path='/home' component={Home} />
+							</IonRouterOutlet>
 
-              <IonTabBar slot="bottom">
-                <IonTabButton tab="tab1" href="/home">
-                  <IonIcon icon={home} />
-                </IonTabButton>
-                <IonTabButton tab="add" href="/add">
-                  <IonIcon icon={add} />
-                </IonTabButton>
-                <IonTabButton tab="profile" href="/profile">
-                  <IonIcon icon={person} />
-                </IonTabButton>
-              </IonTabBar>
-            </IonTabs>
-          )}
-        </IonReactRouter>
-      </IonApp>
-    </Provider>
-  );
+							<IonTabBar slot='bottom'>
+								<IonTabButton tab='tab1' href='/home'>
+									<IonIcon icon={home} />
+								</IonTabButton>
+								<IonTabButton tab='add' href='/add'>
+									<IonIcon icon={add} />
+								</IonTabButton>
+								<IonTabButton tab='profile' href='/profile'>
+									<IonIcon icon={person} />
+								</IonTabButton>
+							</IonTabBar>
+						</IonTabs>
+					)}
+				</IonReactRouter>
+			</IonApp>
+		</Provider>
+	);
 };
 
 export default App;

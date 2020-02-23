@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AACE,OADK,CACL,aAAa,CAAC;EACZ,MAAM,EAAE,QAAQ;EAChB,MAAM,CAAA,MAAC;EACP,eAAe,CAAA,KAAC;CACjB;;AALH,AAOE,OAPK,CAOL,IAAI,CAAC;EACH,KAAK,EAAE,IAAI;CACZ",
-    "sources": [
-        "slide2.scss"
-    ],
-    "names": [],
-    "file": "slide2.css"
-}

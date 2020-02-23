@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AACC,OADM,CACN,aAAa,CAAC;EACb,MAAM,EAAE,QAAQ;EAChB,MAAM,CAAA,MAAC;EACP,eAAe,CAAA,KAAC;CAChB;;AALF,AAOC,OAPM,CAON,IAAI,CAAC;EACJ,KAAK,EAAE,IAAI;CACX",
+    "sources": [
+        "slide2.scss"
+    ],
+    "names": [],
+    "file": "slide2.css"
+}

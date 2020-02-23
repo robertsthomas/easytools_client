@@ -1,4 +1,4 @@
-import { LOADING_TOOLS, SET_TOOLS } from "../types";
+import { LOADING_TOOLS, SET_TOOLS, POST_TOOL } from "../types";
 
 const initState = {
 	loadingTools: false,
@@ -18,6 +18,12 @@ export default function(state = initState, action) {
 				...state,
 				loadingTools: false,
 				tools: [...action.payload]
+			};
+
+		case POST_TOOL:
+			return {
+				...state,
+				tools: [action.payload, ...state.tools]
 			};
 		default:
 			return state;
