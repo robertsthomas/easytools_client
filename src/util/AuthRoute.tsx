@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
 	Route,
 	Redirect,
@@ -6,6 +6,7 @@ import {
 	RouteComponentProps
 } from "react-router-dom";
 import { connect } from "react-redux";
+import LoginModel from "../Components/LoginModel/LoginModel";
 
 interface Props extends RouteProps {
 	component: React.FC<RouteComponentProps>;
@@ -20,14 +21,16 @@ const AuthRoute = ({
 	path,
 	exact,
 	...rest
-}: Props): JSX.Element => (
-	<Route
-		{...rest}
-		render={props =>
-			authenticated === true ? <Redirect to='/' /> : <Component {...props} />
-		}
-	/>
-);
+}: Props): JSX.Element => {
+	return (
+		<Route
+			{...rest}
+			render={props =>
+				authenticated ? <Component {...props} /> : <LoginModel />
+			}
+		/>
+	);
+};
 
 const mapStateToProps = (state: any) => ({
 	authenticated: state.user.authenticated

@@ -5,10 +5,15 @@ import "./styles/slide1.css";
 
 interface Props {
 	nextSlide: Function;
+	handleToolChange: any;
 	setPreview: React.Dispatch<any>;
 }
 
-const Slide1: React.FC<Props> = ({ nextSlide, setPreview }) => {
+const Slide1: React.FC<Props> = ({
+	nextSlide,
+	setPreview,
+	handleToolChange
+}) => {
 	const handleUploadImage = () => {
 		const fileInput: any = document.getElementById("tool-img-upload");
 		fileInput.click();
@@ -23,7 +28,7 @@ const Slide1: React.FC<Props> = ({ nextSlide, setPreview }) => {
 		reader.readAsDataURL(image);
 		reader.onloadend = async () => {
 			await setPreview(reader.result);
-			await nextSlide();
+			nextSlide();
 		};
 	};
 
@@ -36,6 +41,7 @@ const Slide1: React.FC<Props> = ({ nextSlide, setPreview }) => {
 					<IonText>Start by adding a photo</IonText>
 					<input
 						type='file'
+						name='preview'
 						id='tool-img-upload'
 						hidden={true}
 						onChange={handleImageChange}

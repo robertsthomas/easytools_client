@@ -13,7 +13,7 @@ import {
 	IonTabs
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { person, home, add } from "ionicons/icons";
+import { person, home, add, hammer } from "ionicons/icons";
 
 import jwtDecode from "jwt-decode";
 import axios from "axios";
@@ -104,7 +104,7 @@ const App: React.FC = () => {
 
 								<Route path='/add' component={PostTool} />
 								{/* <Route path='/add/details' component={Details} /> */}
-								<Route path='/profile' component={Profile} />
+								<AuthRoute path='/profile' component={Profile} />
 
 								<Route path='/intro' component={Intro} />
 
@@ -114,7 +114,7 @@ const App: React.FC = () => {
 
 							<IonTabBar slot='bottom'>
 								<IonTabButton tab='tab1' href='/home'>
-									<IonIcon icon={home} />
+									<IonIcon icon={hammer} />
 								</IonTabButton>
 								<IonTabButton tab='add' href='/add'>
 									<IonIcon icon={add} />

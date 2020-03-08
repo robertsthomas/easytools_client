@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import { connect } from "react-redux";
 import { getTools } from "../../redux/actions/toolActions";
-import { IonSpinner } from "@ionic/react";
+import { IonSpinner, IonGrid, IonRow, IonCol, IonText } from "@ionic/react";
 
 interface Props {
 	toolState: any;
@@ -20,7 +20,16 @@ const Tools: React.FC<Props> = ({ toolState, getTools }) => {
 				{toolState.loadingTools ? (
 					<IonSpinner></IonSpinner>
 				) : (
-					JSON.stringify(toolState.tools)
+					<IonGrid>
+						<IonRow>
+							{toolState.tools.map((tool: any) => (
+								<IonCol>
+									<img src={tool.preview} />
+									<IonText>{tool.name}</IonText>
+								</IonCol>
+							))}
+						</IonRow>
+					</IonGrid>
 				)}
 			</p>
 		</div>

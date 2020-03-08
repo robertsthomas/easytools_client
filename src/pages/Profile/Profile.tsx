@@ -20,6 +20,7 @@ import { connect } from "react-redux";
 import { logoutUser, uploadImage } from "../../redux/actions/userActions";
 import "./profile.css";
 import { RouteComponentProps } from "react-router";
+import LoginModel from "../../Components/LoginModel/LoginModel";
 
 interface Props extends RouteComponentProps<any> {
 	user: any;
@@ -74,7 +75,7 @@ const Profile: React.FC<Props> = ({
 				</IonToolbar>
 			</IonHeader>
 			<IonContent>
-				{authenticated ? (
+				{authenticated && (
 					<div id='profile-page'>
 						{/* Bio section */}
 						<div className='avatar'>
@@ -113,8 +114,6 @@ const Profile: React.FC<Props> = ({
 
 						{/* Bio section end */}
 					</div>
-				) : (
-					<LoginToProfile />
 				)}
 			</IonContent>
 		</IonPage>

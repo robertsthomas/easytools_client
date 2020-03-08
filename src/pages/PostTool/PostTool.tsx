@@ -21,22 +21,25 @@ interface Props {
 
 const PostTool: React.FC<Props> = ({ UI: { loading }, postTool }) => {
 	let history = useHistory();
-	const [preview, setPreview] = useState();
-	const [slide, setSlide] = useState(2);
+	const [preview, setPreview] = useState("");
+	const [slide, setSlide] = useState(1);
 
 	const [toolValues, setToolValues] = useState({
-		name: ""
+		name: "",
+		preview
 	});
 
 	useEffect(() => {}, []);
 
 	const handleToolChange = (e: any) => {
+		console.log(toolValues);
 		setToolValues({ ...toolValues, [e.target.name]: e.target.value });
 		console.log([e.target.name], e.target.value);
 	};
 
 	const handleToolSubmit = async (e: any) => {
 		e.preventDefault();
+		console.log(preview);
 		await postTool(toolValues);
 		history.push("/");
 	};
@@ -57,7 +60,13 @@ const PostTool: React.FC<Props> = ({ UI: { loading }, postTool }) => {
 					{(() => {
 						switch (slide) {
 							case 1:
-								return <Slide1 setPreview={setPreview} nextSlide={nextSlide} />;
+								return (
+									<Slide1
+										handleToolChange={handleToolChange}
+										setPreview={setPreview}
+										nextSlide={nextSlide}
+									/>
+								);
 
 							case 2:
 								return (

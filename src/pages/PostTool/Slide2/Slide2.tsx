@@ -42,7 +42,7 @@ const Slide2: React.FC<Props> = ({
 							<IonInput
 								name='name'
 								type='text'
-								placeholder='Power Drill'
+								placeholder='ex: Power Drill'
 								onInput={handleToolChange}
 							></IonInput>
 						</IonItem>
