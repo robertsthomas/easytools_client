@@ -5,43 +5,43 @@ import { getTools } from "../../redux/actions/toolActions";
 import { IonSpinner, IonGrid, IonRow, IonCol, IonText } from "@ionic/react";
 
 interface Props {
-	toolState: any;
-	getTools: any;
+  toolState: any;
+  getTools: any;
 }
 
 const Tools: React.FC<Props> = ({ toolState, getTools }) => {
-	useEffect(() => {
-		getTools();
-	}, []);
+  useEffect(() => {
+    getTools();
+  }, []);
 
-	return (
-		<div style={{ padding: "0px 10px" }}>
-			<p>
-				{toolState.loadingTools ? (
-					<IonSpinner></IonSpinner>
-				) : (
-					<IonGrid>
-						<IonRow>
-							{toolState.tools.map((tool: any) => (
-								<IonCol size='6'>
-									<img src={tool.preview} />
-									<IonText>{tool.name}</IonText>
-								</IonCol>
-							))}
-						</IonRow>
-					</IonGrid>
-				)}
-			</p>
-		</div>
-	);
+  return (
+    <div style={{ padding: "0px 10px" }}>
+      <p>
+        {toolState.loadingTools ? (
+          <IonSpinner></IonSpinner>
+        ) : (
+          <IonGrid>
+            <IonRow>
+              {toolState.tools.map((tool: any, idx: number) => (
+                <IonCol size="6" key={idx}>
+                  <img src={tool.preview[0]} />
+                  <IonText>{tool.name}</IonText>
+                </IonCol>
+              ))}
+            </IonRow>
+          </IonGrid>
+        )}
+      </p>
+    </div>
+  );
 };
 
 const mapStateToProps = (state: any) => ({
-	toolState: state.tools
+  toolState: state.tools
 });
 
 const mapActionsToProps = {
-	getTools
+  getTools
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(Tools);

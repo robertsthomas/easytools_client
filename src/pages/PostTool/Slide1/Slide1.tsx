@@ -2,6 +2,7 @@ import React from "react";
 import { IonGrid, IonRow, IonIcon, IonText } from "@ionic/react";
 import { addCircle } from "ionicons/icons";
 import "./styles/slide1.css";
+import { read } from "fs";
 
 interface Props {
   nextSlide: Function;
@@ -15,18 +16,25 @@ const Slide1: React.FC<Props> = ({ nextSlide, setToolValues, toolValues }) => {
     fileInput.click();
   };
 
-  const handleImageChange = async(event: any) => {
+  const handleImageChange = async (event: any) => {
     event.preventDefault();
 
-    let reader = new FileReader();
-    let image = event.target.files[0];
-    console.log(image)
+    let fileObj = [];
+    let fileArray = [];
 
-    reader.readAsDataURL(image);
-    reader.onloadend = async () => {
-      console.log(reader)
-      await nextSlide();
-    };
+    let images = event.target.files;
+
+    fileObj.push(images);
+    for (let i = 0; i < fileObj[0].length; i++) {
+      console.log(fileObj[0][i]);
+      fileArray.push(URL.createObjectURL(fileObj[0][i]));
+    }
+
+    setToolValues({
+      ...toolValues,
+      preview: fileArray
+    });
+    await nextSlide();
   };
 
   return (
@@ -38,6 +46,7 @@ const Slide1: React.FC<Props> = ({ nextSlide, setToolValues, toolValues }) => {
           <IonText>Start by adding a photo</IonText>
           <input
             type="file"
+            multiple
             name="preview"
             id="tool-img-upload"
             hidden={true}

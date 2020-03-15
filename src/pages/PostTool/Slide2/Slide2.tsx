@@ -7,7 +7,8 @@ import {
   IonItem,
   IonLabel,
   IonInput,
-  IonButton
+  IonButton,
+  IonCol
 } from "@ionic/react";
 
 import "./styles/slide2.css";
@@ -23,16 +24,17 @@ const Slide2: React.FC<Props> = ({
   handleToolSubmit,
   handleToolChange
 }) => {
+  useEffect(() => {
+    console.log(toolValues);
+  });
   return (
     <IonGrid id="slide2">
       <IonRow>
-        <IonThumbnail>
-          {toolValues.preview ? (
-            <img id="mlimg" src={toolValues.preview} />
-          ) : (
-            <img src="https://via.placeholder.com/150" />
-          )}
-        </IonThumbnail>
+        {(toolValues.preview || []).map((url: any) => (
+          <IonCol size="4">
+            <img src={url} alt="..." />
+          </IonCol>
+        ))}
       </IonRow>
       <IonRow>
         <form>

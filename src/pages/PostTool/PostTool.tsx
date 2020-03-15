@@ -26,7 +26,7 @@ const PostTool: React.FC<Props> = ({ UI: { loading }, postTool }) => {
 
   const [toolValues, setToolValues] = useState({
     name: "",
-    preview: ""
+    preview: [null]
   });
 
   useEffect(() => {}, []);
