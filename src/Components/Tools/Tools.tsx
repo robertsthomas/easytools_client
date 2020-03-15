@@ -23,7 +23,7 @@ const Tools: React.FC<Props> = ({ toolState, getTools }) => {
 					<IonGrid>
 						<IonRow>
 							{toolState.tools.map((tool: any) => (
-								<IonCol>
+								<IonCol size='6'>
 									<img src={tool.preview} />
 									<IonText>{tool.name}</IonText>
 								</IonCol>

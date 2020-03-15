@@ -15,18 +15,16 @@ const Slide1: React.FC<Props> = ({ nextSlide, setToolValues, toolValues }) => {
     fileInput.click();
   };
 
-  const handleImageChange = (event: any) => {
+  const handleImageChange = async(event: any) => {
     event.preventDefault();
 
     let reader = new FileReader();
     let image = event.target.files[0];
+    console.log(image)
 
     reader.readAsDataURL(image);
     reader.onloadend = async () => {
-      setToolValues({
-        ...toolValues,
-        preview: reader.result
-      });
+      console.log(reader)
       await nextSlide();
     };
   };
