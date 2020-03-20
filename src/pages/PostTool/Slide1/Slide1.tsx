@@ -1,6 +1,6 @@
 import React from "react";
 import { IonGrid, IonRow, IonIcon, IonText } from "@ionic/react";
-import { addCircle } from "ionicons/icons";
+import { addCircle, images } from "ionicons/icons";
 import "./styles/slide1.css";
 import { read } from "fs";
 
@@ -19,20 +19,16 @@ const Slide1: React.FC<Props> = ({ nextSlide, setToolValues, toolValues }) => {
   const handleImageChange = async (event: any) => {
     event.preventDefault();
 
-    let fileObj = [];
-    let fileArray = [];
+    const formData = new FormData();
+    const reader = new FileReader();
 
-    let images = event.target.files;
-
-    fileObj.push(images);
-    for (let i = 0; i < fileObj[0].length; i++) {
-      console.log(fileObj[0][i]);
-      fileArray.push(URL.createObjectURL(fileObj[0][i]));
-    }
+    let image = event.target.files[0];
+    reader.readAsDataURL(image);
+    console.log(reader);
 
     setToolValues({
       ...toolValues,
-      preview: fileArray
+      preview: image
     });
     await nextSlide();
   };
