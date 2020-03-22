@@ -100,7 +100,7 @@ const App: React.FC = () => {
 						<IonTabs>
 							<IonRouterOutlet>
 								<AuthRoute exact path='/login' component={Login} />
-								<AuthRoute exact path='/signup' component={Signup} />
+								<Route exact path='/signup' component={Signup} />
 
 								<Route path='/add' component={PostTool} />
 								{/* <Route path='/add/details' component={Details} /> */}
