@@ -24,7 +24,7 @@ const Tools: React.FC<Props> = ({ toolState, getTools }) => {
             <IonRow>
               {toolState.tools.map((tool: any, idx: number) => (
                 <IonCol size="6" key={idx}>
-                  <img src={tool.preview[0]} />
+                  <img src={tool.preview} />
                   <IonText>{tool.name}</IonText>
                 </IonCol>
               ))}

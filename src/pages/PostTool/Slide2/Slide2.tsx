@@ -30,11 +30,9 @@ const Slide2: React.FC<Props> = ({
   return (
     <IonGrid id="slide2">
       <IonRow>
-        {(toolValues.preview || []).map((url: any) => (
-          <IonCol size="4">
-            <img src={url} alt="..." />
-          </IonCol>
-        ))}
+        <IonCol size="4">
+          <img src={toolValues.preview} alt="..." />
+        </IonCol>
       </IonRow>
       <IonRow>
         <form>

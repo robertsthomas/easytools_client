@@ -24,12 +24,20 @@ const Slide1: React.FC<Props> = ({ nextSlide, setToolValues, toolValues }) => {
 
     let image = event.target.files[0];
     reader.readAsDataURL(image);
-    console.log(reader);
+    console.log(image)
+    reader.onloadend = async () => {
+      const base64Image = reader.result as string;
+      formData.set('file', base64Image)
 
-    setToolValues({
-      ...toolValues,
-      preview: image
-    });
+      console.log(base64Image)
+      setToolValues({
+        ...toolValues,
+        preview: base64Image
+      });
+    }
+
+
+
     await nextSlide();
   };
 

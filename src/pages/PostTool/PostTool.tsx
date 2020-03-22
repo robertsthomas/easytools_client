@@ -26,7 +26,7 @@ const PostTool: React.FC<Props> = ({ UI: { loading }, postTool }) => {
 
   const [toolValues, setToolValues] = useState({
     name: "",
-    preview: [null]
+    preview: ''
   });
 
   useEffect(() => {}, []);
@@ -40,7 +40,7 @@ const PostTool: React.FC<Props> = ({ UI: { loading }, postTool }) => {
   const handleToolSubmit = async (e: any) => {
     e.preventDefault();
     await postTool(toolValues);
-    history.push("/");
+    history.replace("/");
   };
 
   const nextSlide = () => {
