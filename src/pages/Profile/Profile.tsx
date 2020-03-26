@@ -15,12 +15,14 @@ import {
 	IonGrid,
 	IonRow
 } from "@ionic/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { logoutUser, uploadImage } from "../../redux/actions/userActions";
 import "./profile.css";
 import { RouteComponentProps } from "react-router";
 import LoginModel from "../../Components/LoginModel/LoginModel";
+
+import axios from 'axios';
 
 interface Props extends RouteComponentProps<any> {
 	user: any;
@@ -38,6 +40,7 @@ const Profile: React.FC<Props> = ({
 	},
 	history
 }) => {
+
 	const handleImageChange = (event: any) => {
 		const image = event.target.files[0];
 		const formData = new FormData();
@@ -102,7 +105,7 @@ const Profile: React.FC<Props> = ({
 									{/* Segment Section */}
 									<IonSegment value='enemies'>
 										<IonSegmentButton value='friends'>
-											<IonLabel>Friends</IonLabel>
+											<IonLabel>Tools</IonLabel>
 										</IonSegmentButton>
 										<IonSegmentButton value='enemies'>
 											<IonLabel>Enemies</IonLabel>

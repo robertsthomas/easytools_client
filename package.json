@@ -56,5 +56,5 @@
 		"@types/node": "^12.12.17",
 		"@types/react-redux": "^7.1.5"
 	},
-	"proxy": "http://localhost:5000/easy-tools-e0a4b/us-central1/api"
+	"proxy": "https://us-central1-easy-tools-e0a4b.cloudfunctions.net/api"
 }

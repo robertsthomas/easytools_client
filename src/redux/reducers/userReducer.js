@@ -12,7 +12,8 @@ const initState = {
   authenticated: false,
   tutorialComplete: false,
   loading: false,
-  credentials: {}
+  credentials: {},
+  tools: []
 };
 
 export default function(state = initState, action) {
@@ -30,6 +31,7 @@ export default function(state = initState, action) {
       return {
         authenticated: true,
         loading: false,
+        tools: [...action.payload.tools],
         ...action.payload
       };
 
