@@ -13,7 +13,8 @@ import {
 	IonSegmentButton,
 	IonLabel,
 	IonGrid,
-	IonRow
+	IonRow,
+	IonCol
 } from "@ionic/react";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
@@ -36,6 +37,7 @@ const Profile: React.FC<Props> = ({
 	user: {
 		credentials: { user, createdAt, imageUrl, bio, website, location },
 		loading,
+		tools,
 		authenticated
 	},
 	history
@@ -114,6 +116,17 @@ const Profile: React.FC<Props> = ({
 								</IonCardContent>
 							</IonCard>
 						</div>
+
+						<IonGrid>
+							<IonRow>
+								{tools && tools.map((tool: any, idx: number) => (
+									<IonCol size='4' key={idx}>
+										<IonImg src={tool.preview} />
+										<p>{tool.name}</p>
+									</IonCol>
+								))}
+							</IonRow>
+						</IonGrid>
 
 						{/* Bio section end */}
 					</div>
