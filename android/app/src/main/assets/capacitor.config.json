@@ -1,9 +1,0 @@
-{
-  "appId": "com.easytools.app",
-  "appName": "Easy Tools",
-  "bundledWebRuntime": false,
-  "npmClient": "npm",
-  "webDir": "build",
-  "cordova": {},
-  "linuxAndroidStudioPath": "/home/thomas/android-studio/bin/studio.sh"
-}
