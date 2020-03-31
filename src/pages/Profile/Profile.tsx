@@ -79,13 +79,19 @@ const Profile: React.FC<Props> = ({
         </IonToolbar>
       </IonHeader>
       <IonContent>
+        {authenticated &&
         <div id="profile-page">
-          <div className="profile-bg bg-block"></div>
+          <div className="profile-bg bg-block" style={{position: 'relative', zIndex: 0}}>
+            <p style={{color: 'red', position: 'absolute', bottom: 0}}>Test</p>
+          </div>
 
           <div>
-            <IonAvatar></IonAvatar>
+            <IonAvatar>
+              <img src={imageUrl} />
+            </IonAvatar>
           </div>
         </div>
+}
       </IonContent>
     </IonPage>
   );

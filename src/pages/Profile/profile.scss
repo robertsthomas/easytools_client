@@ -53,11 +53,19 @@
     background-image: url("https://pbs.twimg.com/profile_banners/50988711/1384539792/600x200");
     background-position: 0 50%;
     background-size: 100% auto;
-    height: 100px;
+    height: 120px;
     width: 100%;
   }
 
   .bg-block {
     display: block;
+  }
+
+  ion-avatar {
+    border: 2px solid #000;
+    color: #fff;
+    height: 200px;
+    width: 200px;
+    margin: -68px auto 10px;
   }
 }
